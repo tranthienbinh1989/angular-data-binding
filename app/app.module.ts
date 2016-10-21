@@ -7,10 +7,11 @@ import { ProductDetailComponent } from './product-detail.component';
 import { PriceCalculatorComponent } from './price-calculator.component';
 import { CalculatePricePipe } from './calculate-price.pipe';
 import { ProductService } from './product.service';
+import { HighlightDirective } from './highlight.directive';
 
 @NgModule({
   imports: [ BrowserModule, FormsModule ],
-  declarations: [ AppComponent, ProductDetailComponent, PriceCalculatorComponent, CalculatePricePipe ],
+  declarations: [ AppComponent, ProductDetailComponent, PriceCalculatorComponent, CalculatePricePipe, HighlightDirective ],
   bootstrap: [ AppComponent ],
   providers: [ProductService]
 })
