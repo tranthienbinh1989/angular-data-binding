@@ -1,13 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-const products: Product[] = [
-  { id: 11, name: 'Iphone 7S' },
-  { id: 12, name: 'Iphone 6S' },
-  { id: 13, name: 'Ipad Air' },
-  { id: 14, name: 'Macbook Pro' },
-  { id: 15, name: 'Macbook Air' },
-  { id: 16, name: 'Apple TV' }
-];
+import { Product } from './product';
+
+import { PRODUCTS } from './mock-products';
+
+import { ProductService } from './product.service';
 
 @Component({
     selector: 'my-app',
@@ -70,30 +67,31 @@ const products: Product[] = [
         <span class="badge">{{product.id}}</span> {{product.name}}
       </li>
     </ul>
-    <div *ngIf="selectedProduct">
-      <h2>{{selectedProduct.name}} details!</h2>
-      <div><label>id: </label>{{selectedProduct.id}}</div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="selectedProduct.name" placeholder="name"/>
-      </div>
-    </div>
+    <my-product-detail [product]="selectedProduct"></my-product-detail>
+    <price-calculator></price-calculator>
   `
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+    constructor(private productService: ProductService) {
+
+    }
     title = 'Apple Store';
     product : Product = {
                 id: 1,
                 name: 'Macbook'
             };
-    products = products;
+    products : Product[];
+
+    getProducts(): void {
+        this.productService.getProducts().then(products => this.products = products);
+    }
+
+    ngOnInit(): void {
+      this.getProducts();
+    }
+
     selectedProduct: Product;
     onSelect(product: Product): void {
         this.selectedProduct = product;
         }
-}
-
-export class Product {
-  id: number;
-  name: string;
 }
