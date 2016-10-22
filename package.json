@@ -16,7 +16,9 @@
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "typings": "typings",
-    "webdriver:update": "webdriver-manager update"
+    "webdriver:update": "webdriver-manager update",
+    "html": "find ./app -name '*.html' -type f -exec cp --parents {} ./dist \\;",
+    "css": "find ./app -name '*.css' -type f -exec cp --parents {} ./dist \\;"
   },
   "keywords": [],
   "author": "",
