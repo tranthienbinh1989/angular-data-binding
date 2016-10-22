@@ -1,0 +1,6 @@
+<h2>Price Calculator</h2>
+<div>Price: <input [(ngModel)]="price"></div>
+<div>quantity: <input [(ngModel)]="quantity"></div>
+<p>
+    Product Price: {{price | calculatePrice: quantity}}
+</p>

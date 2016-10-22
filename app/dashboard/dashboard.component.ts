@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Product } from '../product';
-import { ProductService } from '../product.service';
+import { Product } from '../product/product';
+import { ProductService } from '../product/product.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getProducts()
-      .then(products => this.products = products.slice(1, 3));
+      .then(products => this.products = products.slice(1, 5));
   }
 
   gotoDetail(product: Product): void {

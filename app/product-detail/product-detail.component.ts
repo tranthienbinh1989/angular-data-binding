@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 
-import { Product } from './product';
+import { Product } from '../product/product';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
-import { ProductService } from './product.service';
+import { ProductService } from '../product/product.service';
 
 @Component({
   moduleId: module.id,
@@ -33,4 +33,8 @@ export class ProductDetailComponent {
     this.location.back();
   }
 
+  save(): void {
+    this.productService.update(this.product)
+      .then(() => this.goBack());
+  }
 }

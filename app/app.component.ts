@@ -8,21 +8,10 @@ import { Component } from '@angular/core';
     <nav>
      <a routerLink="/dashboard">Dashboard</a>
      <a routerLink="/products">Products</a>
+     <a routerLink="/highlight">High Light Directive</a>
+     <a routerLink="/calculator">Price Calculator Pipe</a>
    </nav>
     <router-outlet></router-outlet>
-    
-    <price-calculator></price-calculator>
-    
-    <h4>Pick a highlight color</h4>
-    <div>
-      <input type="radio" name="colors" (click)="color='lightgreen'">Green
-      <input type="radio" name="colors" (click)="color='yellow'">Yellow
-      <input type="radio" name="colors" (click)="color='cyan'">Cyan
-    </div>
-    <p [myHighlight]="color">Highlight me!</p>
-    <p [myHighlight]="color" [defaultColor]="'violet'">
-      Highlight me too!
-    </p>
   `
 })
 export class AppComponent {
