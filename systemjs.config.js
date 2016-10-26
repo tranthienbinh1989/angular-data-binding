@@ -26,7 +26,11 @@
 
       // other libraries
       'rxjs':                      'npm:rxjs',
-      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
+      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
+      'angular2-logger':            'node_modules/angular2-logger',
+      '@ng-bootstrap/ng-bootstrap': 'node_modules/@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
+      'ng2-uploader': 'node_modules/ng2-uploader',
+      'angular-2-local-storage': 'node_modules/angular-2-local-storage',
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -37,10 +41,13 @@
       rxjs: {
         defaultExtension: 'js'
       },
-      'angular-in-memory-web-api': {
-        main: './index.js',
+      'angular2-logger': {
         defaultExtension: 'js'
-      }
+      },
+      'angular-2-local-storage': { 
+        main: 'index.js', 
+        defaultExtension: 'js'
+      },
     }
   });
 })(this);

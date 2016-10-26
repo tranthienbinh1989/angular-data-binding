@@ -1,19 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { User } from './user/user';
+import { SharedService } from './shared.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'my-app',
-    styleUrls: ['dist/app/app.component.css'],
-    template:`
-    <h1>{{title}}</h1>
-    <nav>
-     <a routerLink="/dashboard">Dashboard</a>
-     <a routerLink="/products">Products</a>
-     <a routerLink="/highlight">High Light Directive</a>
-     <a routerLink="/calculator">Price Calculator Pipe</a>
-   </nav>
-    <router-outlet></router-outlet>
-  `
+    styleUrls: ['app.component.css'],
+    templateUrl: 'app.component.html',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     title = 'Apple Store';
+    loginBtn = "Login";
+    register = false;
+    currentUser: User;
+    constructor(
+        private sharedService: SharedService
+    ) {
+         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+         if(this.currentUser !== null) {
+             this.loginBtn = 'Logout';
+             this.register = true;
+         }
+    }
+
+    ngOnInit() {
+    this.subscription = this.sharedService.getEmittedValue()
+      .subscribe(item => {
+          if(item) {
+                this.register = item;
+                this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if(this.currentUser !== null) {
+                    this.loginBtn = 'Logout';
+                    this.register = true;
+                }
+          } else {
+              this.loginBtn = 'Login';
+              this.register = false;
+          }
+        });
+    }
 }

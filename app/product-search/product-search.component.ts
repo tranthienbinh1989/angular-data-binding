@@ -38,7 +38,7 @@ export class ProductSearchComponent implements OnInit {
       });
   }
   gotoDetail(product: Product): void {
-    let link = ['/detail', product.id];
+    let link = ['/detail', product._id];
     this.router.navigate(link);
   }
 }

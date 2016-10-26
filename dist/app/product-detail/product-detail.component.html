@@ -1,6 +1,6 @@
 <div *ngIf="product">
     <h2>{{product.name}} details!</h2>
-    <div><label>id: </label>{{product.id}}</div>
+    <div><label>id: </label>{{product._id}}</div>
     <div>
     <label>name: </label>
     <input [(ngModel)]="product.name" placeholder="name"/>

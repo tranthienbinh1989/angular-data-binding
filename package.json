@@ -18,7 +18,12 @@
     "typings": "typings",
     "webdriver:update": "webdriver-manager update",
     "html": "find ./app -name '*.html' -type f -exec cp --parents {} ./dist \\;",
-    "css": "find ./app -name '*.css' -type f -exec cp --parents {} ./dist \\;"
+    "css": "find ./app -name '*.css' -type f -exec cp --parents {} ./dist \\;",
+    "clean": "rm -rf dist",
+    "serve": "http-server . -p 5556",
+    "build": "npm run clean && tsc",
+    "build_prod": "npm run build && browserify -s main dist/app/main.js > dist/app/bundle.js && npm run minify",
+    "minify": "uglifyjs dist/app/bundle.js --screw-ie8 --compress --mangle --output dist/app/bundle.min.js"
   },
   "keywords": [],
   "author": "",
@@ -38,13 +43,21 @@
     "@angular/platform-browser-dynamic": "~2.1.0",
     "@angular/router": "~3.1.0",
     "@angular/upgrade": "~2.1.0",
-
+    "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.9",
+    "angular-2-local-storage": "0.0.20",
     "angular-in-memory-web-api": "~0.1.5",
-    "bootstrap": "^3.3.7",
-    "systemjs": "0.19.39",
+    "angular-local-storage": "^0.5.0",
+    "angular2-jwt": "^0.1.25",
+    "angular2-logger": "^0.5.0",
+    "bootstrap": "^4.0.0-alpha.5",
+    "browserify": "^13.1.0",
     "core-js": "^2.4.1",
+    "ng2-file-upload": "^1.1.2",
+    "ng2-uploader": "^1.4.0",
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-beta.12",
+    "systemjs": "0.19.39",
+    "uglifyjs": "^2.4.10",
     "zone.js": "^0.6.25"
   },
   "devDependencies": {
@@ -52,7 +65,6 @@
     "lite-server": "^2.2.2",
     "typescript": "^2.0.3",
     "typings": "^1.4.0",
-
     "canonical-path": "0.0.2",
     "http-server": "^0.9.0",
     "tslint": "^3.15.1",

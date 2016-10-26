@@ -5,14 +5,22 @@ import { ProductsComponent }      from './product/products.component';
 import { ProductDetailComponent }  from './product-detail/product-detail.component';
 import { HighlightComponent }  from './highlight/highlight.component';
 import { PriceCalculatorComponent }  from './calculator/price-calculator.component';
+import { ProductFormComponent }  from './product-form/product-form.component';
+import { AuthGuard } from './_guards/index';
+import { LoginComponent } from './user/login.component';
+import { OrderComponent } from './order/order.component';
+import { RegisterComponent } from './user/register.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard',  component: DashboardComponent },
-  { path: 'detail/:id', component: ProductDetailComponent },
+  { path: '',  component: DashboardComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'products/:id', component: ProductFormComponent },
   { path: 'products',   component: ProductsComponent },
-  { path: 'highlight',  component: HighlightComponent },
-  { path: 'calculator',  component: PriceCalculatorComponent },
+  { path: 'checkout',   component: OrderComponent },
+  { path: 'new-product',  component: ProductFormComponent, canActivate: [AuthGuard] },
+  // otherwise redirect to home
+  { path: '**', redirectTo: '' },
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],

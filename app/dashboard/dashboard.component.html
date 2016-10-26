@@ -1,9 +1,25 @@
-<h3>Top Produtcts</h3>
-<div class="grid grid-pad">
-  <div *ngFor="let product of products" (click)="gotoDetail(product)" class="col-1-4">
-    <div class="module hero">
-      <h4>{{product.name}}</h4>
-    </div>
-  </div>
+<div class="container">
+  <ngb-carousel>
+    <template ngbSlide>
+      <img src="http://lorempixel.com/800/400/sports?r=1" alt="Random first slide">
+      <div class="carousel-caption">
+        <h3>First slide label</h3>
+        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      </div>
+    </template>
+    <template ngbSlide>
+      <img src="http://lorempixel.com/800/400/sports?r=2" alt="Random second slide">
+      <div class="carousel-caption">
+        <h3>Second slide label</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+    </template>
+    <template ngbSlide>
+      <img src="http://lorempixel.com/800/400/fashions?r=3" alt="Random third slide">
+      <div class="carousel-caption">
+        <h3>Third slide label</h3>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+      </div>
+    </template>
+  </ngb-carousel>
 </div>
-<product-search></product-search>
