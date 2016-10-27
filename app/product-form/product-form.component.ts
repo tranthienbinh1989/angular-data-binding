@@ -61,7 +61,7 @@ export class ProductFormComponent {
                 this.alerts.push({
                     id: 1,
                     type: 'success',
-                    message: 'This is an success alert',
+                    message: 'Update successful',
                 });
             }, (error) => {
                 console.error(error);

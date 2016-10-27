@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
     loginBtn = "Login";
     register = false;
     currentUser: User;
+    admin = false;
     constructor(
         private sharedService: SharedService
     ) {
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
          if(this.currentUser !== null) {
              this.loginBtn = 'Logout';
              this.register = true;
+             this.admin = this.currentUser.admin;
          }
     }
 
@@ -32,10 +34,12 @@ export class AppComponent implements OnInit {
                 if(this.currentUser !== null) {
                     this.loginBtn = 'Logout';
                     this.register = true;
+                    this.admin = this.currentUser.admin;
                 }
           } else {
               this.loginBtn = 'Login';
               this.register = false;
+              this.admin = false;
           }
         });
     }

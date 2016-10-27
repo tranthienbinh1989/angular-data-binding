@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location }               from '@angular/common';
 
 import { AuthenticationService } from '../_services/index';
 import { SharedService } from '../shared.service';
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private authenticationService: AuthenticationService,
         private sharedService: SharedService,
+        private location: Location,
     ) { }
 
     ngOnInit() {

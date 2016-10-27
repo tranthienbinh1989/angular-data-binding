@@ -1,10 +1,18 @@
-<div *ngIf="product">
-    <h2>{{product.name}} details!</h2>
-    <div><label>id: </label>{{product._id}}</div>
-    <div>
-    <label>name: </label>
-    <input [(ngModel)]="product.name" placeholder="name"/>
+<div class="container">
+    <p *ngFor="let alert of alerts">
+        <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
+    </p>
+    <div *ngIf="product">
+        <h2>{{product.name}}</h2>
+        <p><img class="group list-group-image" width="500px" height="300px" 
+                        src="{{product.image}}" alt=""/></p>
+        <div>
+            <h4>Description</h4>
+            <p>{{ product.description }}</p>
+        </div>
+        <div>
+            <button class="btn btn-info" (click)="goBack()">Back</button>
+            <button class="btn btn-success" (click)="onAddToCart(product)">Add to cart</button>
+        </div>
     </div>
-    <button (click)="goBack()">Back</button>
-    <button (click)="save()">Save</button>
 </div>

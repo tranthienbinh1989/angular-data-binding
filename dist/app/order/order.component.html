@@ -1,5 +1,8 @@
 <div class="container">
-    <div class="alert alert-danger" role="alert" [hidden]="hasOrder">
+    <div class="alert alert-success" role="alert" [hidden]="!success">
+        <strong>Checkout</strong> successful.
+    </div>
+    <div class="alert alert-danger" role="alert" [hidden]="(hasOrder && !success) || (!hasOrder && success)">
         <strong>Your cart</strong> is empty.
     </div>
     <table class="table" [hidden]="!hasOrder">
@@ -9,6 +12,7 @@
         <th>Product</th>
         <th>Price</th>
         <th>Quantity</th>
+        <th></th>
         </tr>
     </thead>
     <tbody>
@@ -16,21 +20,23 @@
             <th scope="row">{{ i + 1 }}</th>
             <td>{{ product.name }}</td>
             <td>{{ product.price }}</td>
-            <td><input type="text" class="form-control" value="{{ product.quantity }}"/></td>
+            <td><input type="text" class="form-control" [ngModel]="product.quantity" (ngModelChange)="onChangeQuantity(product, $event)"/></td>
+            <td><a class="btn btn-warning" (click)="onDeleteProduct(product); $event.stopPropagation()">Remove</a></td>
         </tr>
     </tbody>
     </table>
-    <div class="myclass">
+    <div class="myclass" [hidden]="!hasOrder">
         <form class="form-inline">
             <div class="form-group">
                 <label class="sr-only" for="exampleInputAmount">Total (in dollars)</label>
                 <div class="input-group">
-                <div class="input-group-addon">$</div>
-                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-                <div class="input-group-addon">.00</div>
+                    <div class="input-group-addon">$</div>
+                    <input type="text" class="form-control" id="exampleInputAmount"
+                            placeholder="Total" [value]="total">
+                    <div class="input-group-addon">.00</div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Checkout</button>
+            <a class="btn btn-primary" (click)="onCheckout(); $event.stopPropagation()">Checkout</a>
         </form>
     </div>
 </div>

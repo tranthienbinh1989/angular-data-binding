@@ -24,7 +24,7 @@ export class OrderService {
   getOrder(): Promise<Order> {
     return this.http.get(this.orderUrl)
                .toPromise()
-               .then(response => response.json().data as Order)
+               .then(response => response.json() as Order)
                .catch(this.handleError);
   }
 
@@ -34,6 +34,13 @@ export class OrderService {
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
+  }
+
+  getUserOrders(username: string): Promise<Order[]> {
+    return this.http.get(this.orderUrl + "/users/" + username)
+               .toPromise()
+               .then(response => response.json() as Order[])
+               .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {

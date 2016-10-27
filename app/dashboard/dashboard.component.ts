@@ -3,33 +3,39 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../product/product';
 import { ProductService } from '../product/product.service';
 import { Router } from '@angular/router';
-import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
+import { CarouselModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
   moduleId: module.id,
   selector: 'my-dashboard',
   templateUrl: 'dashboard.component.html',
   styleUrls: [ 'dashboard.component.css' ],
-  providers: [NgbCarouselConfig],
 })
 export class DashboardComponent implements OnInit {
-
-  products: Product[] = [];
-
+  public products: Product[] = [];
+  public myInterval:number = 5000;
+  public noWrapSlides:boolean = false;
+  
   constructor(
       private router: Router,
       private productService: ProductService,
-      private config: NgbCarouselConfig
   ) {
-    // customize default values of carousels used by this component tree
-    config.interval = 800;
-    config.wrap = true;
-    config.keyboard = false;
   }
 
   ngOnInit(): void {
     this.productService.getProducts()
-      .then(products => this.products = products.slice(1, 5));
+      .then(products => {
+        this.products = products.slice(1, 5);
+        this.products.forEach(function(product) {
+          let apiUrl = "http://localhost:3000/";
+          if(typeof product.image !== "undefined") {
+            product.image = apiUrl + product.image;
+          } else {
+            product.image = "http://placehold.it/300x200/000/fff";
+          }
+        });
+       }
+      );
   }
 
   gotoDetail(product: Product): void {

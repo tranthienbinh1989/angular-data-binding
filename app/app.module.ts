@@ -34,6 +34,7 @@ import { OrderService } from './order/order.service';
 import { SharedService } from './shared.service';
 import { RegisterComponent } from './user/register.component';
 import { UserService } from './user/user.service';
+import { ProfileComponent } from './profile/profile.component';
 
 let localStorageServiceConfig = {
     prefix: 'my-app',
@@ -48,6 +49,7 @@ let localStorageServiceConfig = {
     HttpModule,
     NgbModule.forRoot(),
     //InMemoryWebApiModule.forRoot(InMemoryDataService),
+    
   ],
   declarations: [ 
     AppComponent,
@@ -63,6 +65,7 @@ let localStorageServiceConfig = {
     LoginComponent,
     OrderComponent,
     RegisterComponent,
+    ProfileComponent,
   ],
   bootstrap: [ AppComponent ],
   providers: [

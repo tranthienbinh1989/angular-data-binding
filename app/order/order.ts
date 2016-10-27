@@ -6,5 +6,6 @@ export class Order {
     public username?: string,
     public products?: Array<Product>,
     public total?: number,
+    public numProduct?: number,
   ) {  }
 }

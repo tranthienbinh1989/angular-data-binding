@@ -6,7 +6,7 @@ import { User } from './user';
 @Injectable()
 export class UserService {
   private loggedIn = false;
-
+  public redirectUrl = '';
   constructor(
       private http: Http,
       private config: Configuration,
@@ -53,9 +53,17 @@ export class UserService {
       .then(res => res.json() as User)
       .catch(this.handleError);
   }
+  
+   getUser(id: string): Promise<User> {
+    return this.http.get(this.apiUrl + "/users/" + id)
+               .toPromise()
+               .then(response => response.json() as User)
+    }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
+
+
 }

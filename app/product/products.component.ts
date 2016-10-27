@@ -37,7 +37,7 @@ export class ProductsComponent implements OnInit {
         } else {
           product.image = "http://placehold.it/300x200/000/fff";
         }
-      })
+      });
     });
   }
  
@@ -49,6 +49,11 @@ ngOnInit(): void {
       this.isAdmin = true;
     }
 }
+
+gotoDetail(product: Product): void {
+    let link = ['/products/detail', product._id];
+    this.router.navigate(link);
+  }
 
   onSelect(product: Product): void {
     this.selectedProduct = product;
@@ -62,18 +67,17 @@ ngOnInit(): void {
     if(localStorage.getItem('currentOrder') === null) {
         this.order = new Order();
         this.order.products = new Array<Product>();
-        product.quantity = 1;
-        this.order.products.push(product);
-        localStorage.setItem('currentOrder', JSON.stringify(this.order));
     } else {
         this.order = JSON.parse(localStorage.getItem('currentOrder'));
         if (typeof this.order.products === 'undefined') {
            this.order.products = new Array<Product>();
         }
-        product.quantity = 1;
-        this.order.products.push(product);
-        localStorage.setItem('currentOrder', JSON.stringify(this.order));
     }
+    if(this.currentUser != null) {
+          this.order.username = this.currentUser.username;
+    }
+    this.addProduct(product);
+    localStorage.setItem('currentOrder', JSON.stringify(this.order));
     this.alerts.pop();
     this.alerts.push({
                     id: 1,
@@ -81,6 +85,21 @@ ngOnInit(): void {
                     message: 'Product was added to your cart.',
                 });
   }
+
+   addProduct(obj: Product): void {
+      let exist = false;
+      for (let i = 0; i < this.order.products.length; i++) {
+          if (this.order.products[i]._id === obj._id) {
+              this.order.products[i].quantity = this.order.products[i].quantity + 1;
+              exist = true;
+          }
+      }
+      if(!exist) {
+        obj.quantity = 1;
+        this.order.products.push(obj);
+      }
+  }
+
 
   add(name: string): void {
     name = name.trim();

@@ -5,11 +5,14 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="admin" class="nav-item">
         <a class="nav-link" routerLink="/new-product" routerLinkActive="active">Add Product</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/checkout" routerLinkActive="active">Checkout</a>
+      </li>
+      <li *ngIf="register" class="nav-item">
+        <a class="nav-link" routerLink="/users/profile" routerLinkActive="active">Profile</a>
       </li>
     </ul>
     <form class="form-inline float-xs-right">
